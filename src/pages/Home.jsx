@@ -2,13 +2,21 @@
 import Navbar from "../components/Layout/Navbar";
 import Footer from "../components/Layout/Footer";
 
+import Hero from "../components/Home/Hero";
+import WhatWeDo from "../components/Home/WhatWeDo";
+
 const Home = () => {
   return (
     <>
       <Navbar />
 
-      <main id="top" className="relative flex min-h-screen flex-col items-center justify-center bg-[#0B152A] text-white">
-        {/* Homepage sections will go here */}
+      <main id="top">
+        <Hero />
+
+        <WhatWeDo />
+
+        {/* Upcoming homepage sections */}
+        <div id="home-next" />
       </main>
 
       <Footer />

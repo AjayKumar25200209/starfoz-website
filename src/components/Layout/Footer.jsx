@@ -37,9 +37,14 @@ const Footer = () => {
     },
   ];
 
-  return (
-    <footer className="bg-[#101B35] text-white">
+  const linkStyles =
+    "text-sm text-[#B9C8DF] transition-colors duration-300 hover:text-[#3987FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-4 focus-visible:ring-offset-[#101B35]";
 
+  return (
+    <footer
+      className="border-t border-[#293956] bg-[#101B35] text-white"
+      aria-label="Site footer"
+    >
       <div className="mx-auto max-w-[1440px] px-6 pb-8 pt-14 sm:px-8 lg:px-14 lg:pt-16 xl:px-20">
 
         {/* Main Footer Content */}
@@ -47,11 +52,10 @@ const Footer = () => {
 
           {/* Brand Section */}
           <div className="lg:col-span-2">
-
             <Link
               to="/"
               aria-label="StarFoz Home"
-              className="inline-flex items-center gap-3"
+              className="group inline-flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
             >
               <img
                 src={logoDark}
@@ -60,7 +64,7 @@ const Footer = () => {
                 width="54"
                 height="54"
                 loading="lazy"
-                className="h-[54px] w-[54px] object-contain"
+                className="h-[54px] w-[54px] object-contain transition-transform duration-300 group-hover:scale-105"
               />
 
               <span className="flex text-[27px] font-bold leading-none tracking-[-0.06em]">
@@ -69,26 +73,26 @@ const Footer = () => {
               </span>
             </Link>
 
-            <p className="mt-6 max-w-sm text-sm leading-7 text-[#B9C8DF]">
-              Building intelligent software, AI-powered solutions
-              and business automation to drive meaningful
-              digital transformation.
+            <p className="mt-5 max-w-sm text-sm leading-7 text-[#B9C8DF]">
+              We build custom software, AI-powered applications and
+              business automation that help organizations work
+              smarter and grow.
             </p>
 
-            {/* Email */}
+            {/* Contact */}
             <div className="mt-7">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-white">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white">
                 Get in Touch
               </p>
 
               <a
                 href="mailto:contact@starfoz.com"
-                className="group inline-flex items-center gap-2 text-sm font-medium text-[#B9C8DF] transition-colors duration-300 hover:text-[#3987FF]"
+                className="inline-flex items-center gap-2 text-sm font-medium text-[#B9C8DF] transition-colors duration-300 hover:text-[#3987FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
+                  width="17"
+                  height="17"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -104,13 +108,11 @@ const Footer = () => {
                 contact@starfoz.com
               </a>
             </div>
-
           </div>
 
           {/* Footer Link Sections */}
           {footerSections.map((section) => (
             <div key={section.title}>
-
               <h3 className="mb-6 text-sm font-semibold tracking-wide text-white">
                 {section.title}
               </h3>
@@ -118,19 +120,14 @@ const Footer = () => {
               <ul className="space-y-4">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <Link
-                      to={link.path}
-                      className="text-sm text-[#B9C8DF] transition-colors duration-300 hover:text-[#3987FF]"
-                    >
+                    <Link to={link.path} className={linkStyles}>
                       {link.name}
                     </Link>
                   </li>
                 ))}
               </ul>
-
             </div>
           ))}
-
         </div>
 
         {/* Footer Bottom */}
@@ -140,32 +137,30 @@ const Footer = () => {
             © {currentYear} StarFoz. All rights reserved.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
 
             <Link
               to="/privacy-policy"
-              className="text-xs text-[#91A5C5] transition-colors hover:text-white"
+              className="text-xs text-[#91A5C5] transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
             >
               Privacy Policy
             </Link>
 
             <Link
               to="/terms"
-              className="text-xs text-[#91A5C5] transition-colors hover:text-white"
+              className="text-xs text-[#91A5C5] transition-colors duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
             >
               Terms & Conditions
             </Link>
 
             <a
               href="#top"
-              className="flex items-center gap-2 text-xs font-medium text-[#B9C8DF] transition-colors hover:text-[#3987FF]"
+              className="inline-flex items-center gap-2 text-xs font-medium text-[#B9C8DF] transition-colors duration-300 hover:text-[#3987FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
             >
               Back to top
-              <span>↑</span>
+              <span aria-hidden="true">↑</span>
             </a>
-
           </div>
-
         </div>
 
       </div>
