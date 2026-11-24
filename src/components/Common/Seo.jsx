@@ -1,7 +1,7 @@
 
 import { Helmet } from "react-helmet-async";
 
-const SITE_URL = "https://www.starfoz.com";
+const SITE_URL = "https://starfoz.com";
 
 const Seo = ({
   title = "STARFOZ | Digital Solutions & Technology",
