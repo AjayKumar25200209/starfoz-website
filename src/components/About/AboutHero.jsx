@@ -1,24 +1,43 @@
 
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useReducedMotion } from "motion/react";
-import { FiArrowUpRight } from "react-icons/fi";
-import heroBg from "../../assets/heroBg.jpg";
+
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
+
+import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
+
+import heroBg from "../../assets/heroBg.png";
 
 const ease = [0.16, 1, 0.3, 1];
 
 const AboutHero = () => {
+  const heroRef = useRef(null);
   const reduceMotion = useReducedMotion();
 
-  const container = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: reduceMotion ? 0 : 0.28,
-        delayChildren: reduceMotion ? 0 : 0.3,
-      },
-    },
-  };
+  // Background parallax - same as Home Hero
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
+  const backgroundY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduceMotion ? ["0%", "0%"] : ["0%", "8%"]
+  );
+
+  const backgroundScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduceMotion ? [1, 1] : [1, 1.04]
+  );
+
+  // Individual element animation
   const fadeUp = {
     hidden: {
       opacity: 0,
@@ -34,13 +53,37 @@ const AboutHero = () => {
     },
   };
 
+  // Staggered entrance
+  const container = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduceMotion ? 0 : 0.28,
+        delayChildren: reduceMotion ? 0 : 0.3,
+      },
+    },
+  };
+
   return (
     <section
+      ref={heroRef}
+      id="about"
       aria-labelledby="about-hero-heading"
-      className="relative isolate flex min-h-[620px] items-center overflow-hidden bg-[#101B35] text-white sm:min-h-[680px] lg:min-h-[720px]"
+      className="relative isolate flex min-h-[calc(100svh-82px)] w-full items-center overflow-hidden bg-[#071426] text-white"
     >
-      {/* Background Image */}
-      <div className="absolute inset-0 -z-20">
+      {/* Background Image with Parallax */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 -z-30"
+        style={
+          reduceMotion
+            ? {}
+            : {
+                y: backgroundY,
+                scale: backgroundScale,
+              }
+        }
+      >
         <img
           src={heroBg}
           alt=""
@@ -49,77 +92,89 @@ const AboutHero = () => {
           decoding="async"
           className="h-full w-full object-cover object-[65%_center] sm:object-center"
         />
-      </div>
+      </motion.div>
 
-      {/* Same Home Hero Overlays */}
-      <div className="absolute inset-0 -z-10 bg-[#101B35]/20" />
+      {/* Same Gradient Overlay as Home Hero */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-20 bg-gradient-to-r from-[#071426]/90 via-[#071426]/60 to-[#071426]/5"
+      />
 
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#101B35]/65 via-[#101B35]/30 to-transparent" />
-
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#101B35]/35 via-transparent to-transparent" />
-
-      {/* Content */}
+      {/* Main Hero Container */}
       <div className="mx-auto w-full max-w-[1720px] px-5 py-20 sm:px-7 sm:py-24 lg:px-10 lg:py-28 xl:px-12 2xl:px-16">
-
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-[850px]"
+          className="relative z-10 max-w-[950px]"
         >
           {/* Eyebrow */}
-          <motion.div
-            variants={fadeUp}
-            className="mb-6 flex items-center gap-3"
-          >
-            <span className="h-[2px] w-8 bg-[#3987FF]" />
+          <motion.div variants={fadeUp}>
+            <div className="mb-8 inline-flex items-center gap-3">
+              <span className="h-[2px] w-9 bg-[#3987FF]" />
 
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#B9C8DF]">
-              About StarFoz
-            </span>
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#8DBAFF]">
+                About StarFoz
+              </span>
+            </div>
           </motion.div>
 
-          {/* Heading */}
+          {/* Main Heading */}
           <motion.h1
-            variants={fadeUp}
             id="about-hero-heading"
-            className="text-[clamp(2.7rem,5.5vw,5rem)] font-bold leading-[1.06] tracking-[-0.06em]"
+            variants={fadeUp}
+            className="text-[clamp(2.8rem,6.5vw,5.8rem)] font-bold leading-[1.06] tracking-[-0.055em]"
           >
-            Engineering what's next.
-            <span className="block text-[#3987FF]">
-              Building what matters.
+            Engineering What's Next.
+
+            <span className="mt-2 block text-[#3987FF]">
+              Building What Matters.
+            </span>
+
+            <span className="mt-4 block text-[clamp(1.5rem,3vw,2.4rem)] font-semibold leading-tight tracking-[-0.035em] text-white">
+              Turning Ideas Into Digital Reality.
             </span>
           </motion.h1>
 
           {/* Description */}
           <motion.p
             variants={fadeUp}
-            className="mt-7 max-w-[650px] text-sm leading-7 text-[#E0E8F5] sm:text-base sm:leading-8"
+            className="mt-8 max-w-[680px] text-base leading-8 text-[#D0D9E8] sm:text-lg"
           >
             We build intelligent digital products, custom software
             and business automation that help organizations solve
-            challenges and move forward.
+            complex challenges, unlock opportunities and move forward.
           </motion.p>
 
-          {/* CTA */}
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
+          {/* CTA Buttons */}
+          <motion.div
+            variants={fadeUp}
+            className="mt-10 flex flex-col gap-4 sm:flex-row"
+          >
+            {/* Primary CTA */}
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-3 rounded-md bg-[#3987FF] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#2878F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
+              className="group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#3987FF] px-7 py-4 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#2878F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071426]"
             >
               Let's Talk
 
               <FiArrowUpRight
-                size={17}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                size={19}
+                className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
               />
             </Link>
 
+            {/* Secondary CTA */}
             <Link
               to="/services"
-              className="inline-flex items-center gap-2 rounded-md border border-white/35 px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:border-white/60 hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF]"
+              className="group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg border border-white/35 bg-white/[0.05] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#3987FF] hover:bg-[#3987FF]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071426]"
             >
               Explore Services
+
+              <FiArrowRight
+                size={18}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </Link>
           </motion.div>
         </motion.div>

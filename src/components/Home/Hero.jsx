@@ -14,7 +14,7 @@ import {
   FiArrowUpRight,
 } from "react-icons/fi";
 
-import heroBg from "../../assets/heroBg.jpg";
+import heroBg from "../../assets/heroBg.png";
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -40,7 +40,7 @@ const Hero = () => {
     reduceMotion ? [1, 1] : [1, 1.04]
   );
 
-  // Smooth individual element animation
+  // Individual element animation
   const fadeUp = {
     hidden: {
       opacity: 0,
@@ -56,7 +56,7 @@ const Hero = () => {
     },
   };
 
-  // Gradual staggered entrance
+  // Staggered entrance
   const container = {
     hidden: {},
     visible: {
@@ -72,9 +72,9 @@ const Hero = () => {
       ref={heroRef}
       id="home"
       aria-labelledby="hero-heading"
-      className="relative isolate flex min-h-[calc(100svh-82px)] w-full items-center overflow-hidden bg-[#101B35] text-white"
+      className="relative isolate flex min-h-[calc(100svh-82px)] w-full items-center overflow-hidden bg-[#071426] text-white"
     >
-      {/* Background image */}
+      {/* Background Image */}
       <motion.div
         aria-hidden="true"
         className="absolute inset-0 -z-30"
@@ -97,31 +97,13 @@ const Hero = () => {
         />
       </motion.div>
 
-      {/* Overall subtle navy overlay */}
+      {/* Left-to-Right Gradient Overlay */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-20 bg-[#101B35]/20"
+        className="absolute inset-0 -z-20 bg-gradient-to-r from-[#071426]/90 via-[#071426]/60 to-[#071426]/5"
       />
 
-      {/* Left gradient for headline readability */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-r from-[#101B35]/65 via-[#101B35]/30 to-transparent"
-      />
-
-      {/* Gentle bottom gradient */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-[#101B35]/35 via-transparent to-transparent"
-      />
-
-      {/* Subtle electric blue glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-40 top-1/4 -z-10 h-[450px] w-[450px] rounded-full bg-[#3987FF]/[0.04] blur-[150px]"
-      />
-
-      {/* Main hero container */}
+      {/* Main Hero Container */}
       <div className="mx-auto w-full max-w-[1720px] px-5 py-20 sm:px-7 sm:py-24 lg:px-10 lg:py-28 xl:px-12 2xl:px-16">
         <motion.div
           variants={container}
@@ -140,7 +122,7 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Main heading */}
+          {/* Main Heading */}
           <motion.h1
             id="hero-heading"
             variants={fadeUp}
@@ -167,7 +149,7 @@ const Hero = () => {
             challenges and move forward.
           </motion.p>
 
-          {/* CTA buttons */}
+          {/* CTA Buttons */}
           <motion.div
             variants={fadeUp}
             className="mt-10 flex flex-col gap-4 sm:flex-row"
@@ -175,7 +157,7 @@ const Hero = () => {
             {/* Primary CTA */}
             <Link
               to="/services"
-              className="group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#3987FF] px-7 py-4 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#2878F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101B35]"
+              className="group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg bg-[#3987FF] px-7 py-4 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#2878F2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071426]"
             >
               Explore Our Services
 
@@ -188,7 +170,7 @@ const Hero = () => {
             {/* Secondary CTA */}
             <Link
               to="/contact"
-              className="group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg border border-white/35 bg-white/[0.05] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#3987FF] hover:bg-[#3987FF]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#101B35]"
+              className="group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-lg border border-white/35 bg-white/[0.05] px-7 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:border-[#3987FF] hover:bg-[#3987FF]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3987FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071426]"
             >
               Let's Talk
 
